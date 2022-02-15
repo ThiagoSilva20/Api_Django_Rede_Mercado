@@ -1,0 +1,1 @@
+web: sh -c "cd projeto && python manage.py migrate && gunicorn projeto.wsgi:application"
