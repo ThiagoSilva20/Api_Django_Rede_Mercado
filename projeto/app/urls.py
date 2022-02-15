@@ -19,4 +19,5 @@ urlpatterns = [
     path('search_prod', views.busca_prod),
     path('search_list', views.busca_list),
     path('search_venda', views.busca_venda),
+    path('calcula_venda/<int:id>', views.soma_precos),
 ]

@@ -20,7 +20,7 @@ class ProdutoSerializer(serializers.ModelSerializer):
 class ListaDeProdutosSerializer(serializers.ModelSerializer):
     class Meta:
         model = ListaDeProdutos
-        fields = ['id','venda', 'produto']
+        fields = ['id','venda','quantidade' , 'produto']
 class VendaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Venda

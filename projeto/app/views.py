@@ -99,7 +99,7 @@ def busca_list(request):
     filtro2 = ListaDeProdutosSerializer(filtro, many=True).data
     return Response(data=filtro2)
 
-########################################
+#########################################
 
 @api_view(['GET'])
 def busca_venda(request):
@@ -111,3 +111,19 @@ def busca_venda(request):
     return Response(data=filtro2)
 #########################################
 
+#venda
+@api_view(['GET'])
+def soma_precos(request, id):
+    list_produtos = ListaDeProdutos.objects.filter(id=id)
+    total = 0
+    for objeto in list_produtos:
+        total += objeto.produto.valor * objeto.quantidade
+
+    venda = list_produtos[0].venda
+    venda.total = total
+    venda.save()
+
+    return Response(data=total)
+
+#########################################
+    

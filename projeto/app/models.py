@@ -1,3 +1,4 @@
+from email.policy import default
 from random import choices
 from django.db import models
 from django.forms import CharField
@@ -7,6 +8,9 @@ from django.forms import CharField
 class Rede(models.Model):
     nome_rede = models.CharField(max_length=100)
     cnpj = models.CharField(max_length=14)
+    
+    def __str__(self):
+        return str(self.nome_rede)
 
 ###############################################
 
@@ -22,6 +26,10 @@ class Pessoa(models.Model):
     role = models.IntegerField(choices=ROLES)
     rede = models.ForeignKey("Rede", on_delete=models.DO_NOTHING)
 
+    def __str__(self):
+        return str(self.nome)
+
+
 ###############################################
 
 class Loja(models.Model):
@@ -30,6 +38,10 @@ class Loja(models.Model):
     complemento = models.CharField(max_length=100)
     rede = models.ForeignKey("Rede", on_delete=models.DO_NOTHING)
 
+    def __str__(self):
+        return str(self.nome_loja)
+
+
 ###############################################
 
 class Produto(models.Model):
@@ -37,18 +49,24 @@ class Produto(models.Model):
     valor = models.DecimalField(decimal_places=2, max_digits=5)
     loja = models.ForeignKey("Loja", on_delete=models.DO_NOTHING)
 
+    def __str__(self):
+        return str(self.nome_produto)
 
 ###############################################
 
 class ListaDeProdutos(models.Model):
     venda = models.ForeignKey("Venda", on_delete=models.DO_NOTHING)
+    quantidade = models.IntegerField( default=1)
     produto = models.ForeignKey("Produto", on_delete=models.DO_NOTHING)
+    
     def __str__(self):
-
-        return self.venda.id
+        return str(self.venda.id)
 
 ###############################################
 
 class Venda(models.Model):
     diaehora = models.DateTimeField(auto_now_add=True)
     total = models.DecimalField(decimal_places=2, max_digits=7,default=0.0)
+    
+    def __str__(self):
+        return str(self.diaehora)
