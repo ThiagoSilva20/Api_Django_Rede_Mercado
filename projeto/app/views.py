@@ -109,3 +109,5 @@ def busca_venda(request):
 
     filtro2 = VendaSerializer(filtro, many=True).data
     return Response(data=filtro2)
+#########################################
+
