@@ -43,7 +43,10 @@ class Produto(models.Model):
 class ListaDeProdutos(models.Model):
     venda = models.ForeignKey("Venda", on_delete=models.DO_NOTHING)
     produto = models.ForeignKey("Produto", on_delete=models.DO_NOTHING)
-    
+    def __str__(self):
+
+        return self.venda.id
+
 ###############################################
 
 class Venda(models.Model):
