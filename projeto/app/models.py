@@ -1,3 +1,4 @@
+from curses.ascii import FF
 from email.policy import default
 from random import choices
 from django.db import models
@@ -69,4 +70,4 @@ class Venda(models.Model):
     total = models.DecimalField(decimal_places=2, max_digits=7,default=0.0)
     
     def __str__(self):
-        return str(self.diaehora)
+        return str(self.id)

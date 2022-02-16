@@ -9,44 +9,44 @@ from .serializers import RedeSerializer, PessoaSerializer, LojaSerializer, Produ
 from rest_framework import viewsets
 
 
-########################################
+####################R####################
 
 class RedeView(viewsets.ModelViewSet):
     queryset = Rede.objects.all()
     serializer_class = RedeSerializer
 
-########################################
+####################P####################
 
 
 class PessoaView(viewsets.ModelViewSet):
     queryset = Pessoa.objects.all()
     serializer_class = PessoaSerializer
 
-########################################
+####################L####################
 
 class LojaView(viewsets.ModelViewSet):
     queryset = Loja.objects.all()
     serializer_class = LojaSerializer
 
-########################################
+####################P####################
 
 class ProdutoView(viewsets.ModelViewSet):
     queryset = Produto.objects.all()
     serializer_class = ProdutoSerializer
 
-########################################
+####################L####################
 
 class ListaDeProdutosView(viewsets.ModelViewSet):
     queryset = ListaDeProdutos.objects.all()
     serializer_class = ListaDeProdutosSerializer
 
-########################################
+####################V####################
 
 class VendasView(viewsets.ModelViewSet):
     queryset = Venda.objects.all()
     serializer_class = VendaSerializer
 
-######################################## 
+#####################V################### 
 
 @api_view(['GET'])
 def busca_rede(request):
@@ -114,7 +114,8 @@ def busca_venda(request):
 #venda
 @api_view(['GET'])
 def soma_precos(request, id):
-    list_produtos = ListaDeProdutos.objects.filter(id=id)
+    venda = Venda.objects.filter(id=id)
+    list_produtos = ListaDeProdutos.objects.filter(venda=venda)
     total = 0
     for objeto in list_produtos:
         total += objeto.produto.valor * objeto.quantidade
