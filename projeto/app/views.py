@@ -1,5 +1,8 @@
+from copy import error
+from urllib import response
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import status
 from .models import Rede, Pessoa, Loja, Produto, ListaDeProdutos, Venda
 from .serializers import RedeSerializer, PessoaSerializer, LojaSerializer, ProdutoSerializer, ListaDeProdutosSerializer, VendaSerializer
 
@@ -7,6 +10,7 @@ from .serializers import RedeSerializer, PessoaSerializer, LojaSerializer, Produ
 ########################################
 
 from rest_framework import viewsets
+
 
 
 ####################R####################
@@ -126,5 +130,35 @@ def soma_precos(request, id):
 
     return Response(data=total)
 
-#########################################
+######################################################################################
     
+@api_view(['GET'])
+def fun_rede_g(request):
+    rede = Rede.objects.all()
+    serializer = RedeSerializer(rede, many=True)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def fun_rede_p(request):
+    try:
+        if not request.data.__contains__('nome_rede'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar nome da rede comércios."})
+        
+        if not request.data.__contains__('cnpj'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar cnpj da rede de comércios."})
+
+        rede = Rede(nome_rede=request.data['nome_rede'], cnpj=request.data['cnpj'])
+        rede.save()
+
+        return Response(data=RedeSerializer(rede).data, status=status.HTTP_201_CREATED)
+    except Exception:
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL FAZER O POST"})
+
+@api_view(['DELETE'])
+def fun_rede_d(request, id):
+    try:
+        dele = Rede.objects.get(pk=id)
+        dele.delete()
+        
+    except Exception:
+        return Response(status=status.HTTP_204_NO_CONTENT)

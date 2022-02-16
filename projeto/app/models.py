@@ -1,8 +1,4 @@
-from curses.ascii import FF
-from email.policy import default
-from random import choices
 from django.db import models
-from django.forms import CharField
 
 ###############################################
 

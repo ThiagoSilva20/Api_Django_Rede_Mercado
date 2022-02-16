@@ -20,4 +20,8 @@ urlpatterns = [
     path('search_list', views.busca_list),
     path('search_venda', views.busca_venda),
     path('calcula_venda/<int:id>', views.soma_precos),
+    path('get_rede', views.fun_rede_g),
+    path('post_rede', views.fun_rede_p),
+    path('delete_rede/<int:id>', views.fun_rede_d),
+
 ]
