@@ -153,7 +153,8 @@ def fun_rede_p(request):
         rede.save()
 
         return Response(data=RedeSerializer(rede).data, status=status.HTTP_201_CREATED)
-    except Exception:
+    except Exception as e:
+        print(e)
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL FAZER O POST"})
 
 ##########################################
@@ -186,7 +187,8 @@ def fun_rede_pu(request, id):
         rede.save()
 
         return Response(data=RedeSerializer(rede).data, status=status.HTTP_200_OK)
-    except Exception:
+    except Exception as e:
+        print(e)
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL FAZER O PUT"})
 
 ##########################################
@@ -196,10 +198,96 @@ def fun_rede_g1(request,id):
     try:
         rede = Rede.objects.get(pk=id)
         serializer = RedeSerializer(rede)
-        return Response(serializer.data)
-        
+        return Response(serializer.data,status=status.HTTP_200_OK)
     except Exception:
                 return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL FAZER O PUT"})
 
 ############################################################################################################################################
 
+@api_view(['GET'])
+def fun_pessoa_g(request):
+    pessoa = Pessoa.objects.all()
+    serializer = PessoaSerializer(pessoa, many=True)
+    return Response(serializer.data)
+
+##########################################
+
+@api_view(['POST'])
+def fun_pessoa_p(request):
+    try:
+        if not request.data.__contains__('nome'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar nome."})
+        
+        if not request.data.__contains__('email'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar email."})
+        
+        if not request.data.__contains__('role'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar o trabalho."})
+        
+        if not request.data.__contains__('rede'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar a rede de comércio."})
+
+        rede = Rede.objects.get(pk=request.data['rede'])
+
+        pessoa = Pessoa(nome=request.data['nome'], email=request.data['email'], role=request.data['role'], rede=rede)
+        pessoa.save()
+
+        return Response(data=PessoaSerializer(pessoa).data, status=status.HTTP_201_CREATED)
+    except Exception as e:
+        print(e)
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL FAZER O POST"})
+
+##########################################
+
+@api_view(['DELETE'])
+def fun_pessoa_d(request, id):
+    try:
+        dele = Pessoa.objects.get(pk=id)
+        dele.delete()
+        return Response(status=status.HTTP_200_OK)
+    except Exception:
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL FAZER O PUT"} )
+
+##########################################
+
+@api_view(['PUT'])
+def fun_pessoa_pu(request, id):
+
+
+    try:
+        if not request.data.__contains__('nome'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar nome."})
+        
+        if not request.data.__contains__('email'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar email."})
+        
+        if not request.data.__contains__('role'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar o trabalho."})
+        
+        if not request.data.__contains__('rede'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar a rede de comércio."})
+
+        pessoa = Pessoa.objects.get(pk=id)
+        pessoa.nome = request.data['nome']
+        pessoa.email = request.data['email']
+        pessoa.role = request.data['role']
+        pessoa.rede = request.data['rede']
+        pessoa.save()
+
+        return Response(data=PessoaSerializer(pessoa).data, status=status.HTTP_200_OK)
+    except Exception:
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL FAZER O PUT"})
+
+##########################################
+
+@api_view(['GET'])
+def fun_pessoa_g1(request,id):
+    try:
+        pessoa = Pessoa.objects.get(pk=id)
+        serializer = RedeSerializer(pessoa)
+        return Response(serializer.data)
+        
+    except Exception:
+                return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL PEGAR A INFORMAÇÃO"})
+
+############################################################################################################################################
