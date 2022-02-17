@@ -130,13 +130,15 @@ def soma_precos(request, id):
 
     return Response(data=total)
 
-######################################################################################
+############################################################################################################################################
     
 @api_view(['GET'])
 def fun_rede_g(request):
     rede = Rede.objects.all()
     serializer = RedeSerializer(rede, many=True)
     return Response(serializer.data)
+
+##########################################
 
 @api_view(['POST'])
 def fun_rede_p(request):
@@ -154,6 +156,8 @@ def fun_rede_p(request):
     except Exception:
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL FAZER O POST"})
 
+##########################################
+
 @api_view(['DELETE'])
 def fun_rede_d(request, id):
     try:
@@ -161,4 +165,41 @@ def fun_rede_d(request, id):
         dele.delete()
         
     except Exception:
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL FAZER O PUT"} )
+
+##########################################
+
+@api_view(['PUT'])
+def fun_rede_pu(request, id):
+
+
+    try:
+        if not request.data.__contains__('nome_rede'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar nome da rede comércios."})
+        
+        if not request.data.__contains__('cnpj'):
+            return Response(status=status.HTTP_400_BAD_REQUEST, data={"message":"Por favor informar cnpj da rede de comércios."})
+
+        rede = Rede.objects.get(pk=id)
+        rede.nome_rede = request.data['nome_rede']
+        rede.cnpj = request.data['cnpj']
+        rede.save()
+
+        return Response(data=RedeSerializer(rede).data, status=status.HTTP_200_OK)
+    except Exception:
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL FAZER O PUT"})
+
+##########################################
+
+@api_view(['GET'])
+def fun_rede_g1(request,id):
+    try:
+        rede = Rede.objects.get(pk=id)
+        serializer = RedeSerializer(rede)
+        return Response(serializer.data)
+        
+    except Exception:
+                return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR, data={"messsage":"NÃO FOI POSSIVEL FAZER O PUT"})
+
+############################################################################################################################################
+

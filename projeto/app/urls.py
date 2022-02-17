@@ -23,5 +23,7 @@ urlpatterns = [
     path('get_rede', views.fun_rede_g),
     path('post_rede', views.fun_rede_p),
     path('delete_rede/<int:id>', views.fun_rede_d),
+    path('put_rede/<int:id>', views.fun_rede_pu),
+    path('get_uni_rede/<int:id>', views.fun_rede_g1),
 
 ]
