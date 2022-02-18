@@ -34,23 +34,29 @@ urlpatterns = [
      path('put_pessoa/<int:id>', views.fun_pessoa_pu),
      path('get_uni_pessoa/<int:id>', views.fun_pessoa_g1),
      ####
-    # path('get_produto', views.fun_produto_g),
-    # path('post_produto', views.fun_produto_p),
-    # path('delete_produto/<int:id>', views.fun_produto_d),
-    # path('put_produto/<int:id>', views.fun_produto_pu),
-    # path('get_uni_produto/<int:id>', views.fun_produto_g1),
-    # ####
-    # path('get_lista', views.fun_lista_g),
-    # path('post_lista', views.fun_lista_p),
-    # path('delete_lista/<int:id>', views.fun_lista_d),
-    # path('put_lista/<int:id>', views.fun_lista_pu),
-    # path('get_uni_lista/<int:id>', views.fun_lista_g1),
-    # ####
-    # path('get_venda', views.fun_venda_g),
-    # path('post_venda', views.fun_venda_p),
-    # path('delete_venda/<int:id>', views.fun_venda_d),
-    # path('put_venda/<int:id>', views.fun_venda_pu),
-    # path('get_uni_venda/<int:id>', views.fun_venda_g1),
-    # ####
+     path('get_loja', views.fun_loja_g),
+     path('post_loja', views.fun_loja_p),
+     path('delete_loja/<int:id>', views.fun_loja_d),
+     path('put_loja/<int:id>', views.fun_loja_pu),
+     path('get_uni_loja/<int:id>', views.fun_loja_g1),
+     ####
+     path('get_produto', views.fun_produto_g),
+     path('post_produto', views.fun_produto_p),
+     path('delete_produto/<int:id>', views.fun_produto_d),
+     path('put_produto/<int:id>', views.fun_produto_pu),
+     path('get_uni_produto/<int:id>', views.fun_produto_g1),
+     ####
+     path('get_lista', views.fun_lista_g),
+     path('post_lista', views.fun_lista_p),
+     path('delete_lista/<int:id>', views.fun_lista_d),
+     path('put_lista/<int:id>', views.fun_lista_pu),
+     path('get_uni_lista/<int:id>', views.fun_lista_g1),
+     ####
+     path('get_venda', views.fun_venda_g),
+     path('post_venda', views.fun_venda_p),
+     path('delete_venda/<int:id>', views.fun_venda_d),
+     path('put_venda/<int:id>', views.fun_venda_pu),
+     path('get_uni_venda/<int:id>', views.fun_venda_g1),
+     ####
 
 ]
