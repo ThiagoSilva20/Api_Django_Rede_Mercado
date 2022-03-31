@@ -30,6 +30,19 @@ ALLOWED_HOSTS = ['appgyer.com', 'appgyverapp.com', 'https://platform.appgyver.co
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+    "x-access-token"
+]
+
 # Application definition
 
 INSTALLED_APPS = [
