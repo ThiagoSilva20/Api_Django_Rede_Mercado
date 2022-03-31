@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-x+9j7%#zt#8tr@u%dzikc)l!y&@^@7h6y*b*qbpieo-i*-#xk^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['th-projeto1.herokuapp.com', 'appgyer.com', 'appgyverapp.com', 'platform.appgyver.com', '*']
+ALLOWED_HOSTS = ['th-projeto1.herokuapp.com', 'appgyer.com', 'appgyverapp.com', 'https://platform.appgyver.com', '*']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
